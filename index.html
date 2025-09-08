@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্যাকেজ অ্যাক্টিভেশন - সফল!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+        /* FontAwesome for Icons */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+
+        :root { /* আগের ভেরিয়েবলস */
+            --primary-color: #005c9e; --secondary-color: #007bff;
+            --accent-color: #d60076; --speed-color: #e6007e;
+            --success-color: #28a745; --warning-color: #ffc107;
+            --danger-color: #dc3545; --info-color: #17a2b8;
+            --light-bg: #f0f4f8; --dark-text: #212529;
+            --light-text: #5a6a7a; --card-bg: #ffffff;
+            --border-color: #dce4ec;
+            --gradient-primary: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            --gradient-hover: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        body {
+            font-family: 'Noto Sans Bengali', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7; margin: 0; padding: 0;
+            background-color: var(--light-bg); color: var(--dark-text); font-size: 16px;
+            display: flex; /* Center content vertically */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full height */
+        }
+        .container {
+            max-width: 700px; /* Narrower for confirmation */
+            width: 90%;
+            margin: 20px auto; padding: 40px 35px;
+            background-color: var(--card-bg); border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid var(--success-color); /* Success indicator top border */
+        }
+
+        /* Header Style */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+        .header .brand-logo { /* Placeholder for logo */
+             font-size: 1.5em;
+             font-weight: 700;
+             color: var(--primary-color);
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             gap: 10px;
+        }
+         .header .brand-logo i { /* Router icon */
+             color: var(--secondary-color);
+         }
+        .header .system-info {
+            font-size: 0.9em;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+
+        /* Confirmation Box Style */
+        .confirmation-box {
+            text-align: center;
+        }
+        .confirmation-box .icon {
+            font-size: 4.5em; /* Large icon */
+            color: var(--success-color);
+            margin-bottom: 20px;
+            animation: scaleUp 0.5s ease-out;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .confirmation-box h1 {
+            color: var(--success-color);
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .confirmation-box .message {
+            font-size: 1.15em;
+            color: var(--dark-text);
+            margin-bottom: 30px;
+        }
+
+        /* Details Section */
+        .details {
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        .details h2 {
+             font-size: 1.4em;
+             color: var(--primary-color);
+             margin-top: 0;
+             margin-bottom: 15px;
+             text-align: center;
+             border-bottom: 1px solid var(--border-color);
+             padding-bottom: 10px;
+        }
+        .details p {
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05em;
+            border-bottom: 1px dashed #e0e9f5;
+            padding-bottom: 8px;
+        }
+         .details p:last-child { border-bottom: none; padding-bottom: 0; }
+        .details .label {
+            color: var(--light-text);
+            font-weight: 500;
+            margin-right: 15px;
+        }
+        .details .value {
+            font-weight: 600;
+            color: var(--dark-text);
+            text-align: right;
+            word-break: break-all; /* Break long TrxIDs */
+        }
+         .details .value.package-name { color: var(--accent-color); font-weight: 700; }
+         .details .value.phone-number { color: var(--secondary-color); }
+         .details .value.trx-id { color: var(--info-color); font-family: monospace; font-size: 0.95em;}
+         /* এই ক্লাসের এলিমেন্টেই সময় দেখাবে */
+         .details .value.datetime { color: var(--success-color); }
+
+        /* Support and Actions */
+        .support-info {
+            text-align: center;
+            font-size: 0.95em;
+            color: var(--light-text);
+            margin-bottom: 30px;
+        }
+        .support-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .support-info a:hover { text-decoration: underline; }
+
+        .actions {
+            text-align: center;
+        }
+        .action-button {
+            padding: 12px 30px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        .action-button:hover {
+             background: var(--gradient-hover);
+             box-shadow: 0 6px 15px rgba(0, 92, 158, 0.5);
+             transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+             .container { padding: 30px 20px; }
+             h1 { font-size: 2.5em; }
+             .confirmation-box h1 { font-size: 1.9em; }
+             .confirmation-box .message { font-size: 1.05em; }
+             .details h2 { font-size: 1.3em;}
+             .details p { font-size: 1em; flex-direction: column; align-items: flex-start;}
+             .details .value { text-align: left; margin-top: 3px;}
+             .action-button { font-size: 1em; padding: 10px 25px;}
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="brand-logo">
+                 <i class="fas fa-wifi"></i> <!-- Router Icon -->
+                 <span>Microtic নেটওয়ার্ক ম্যানেজমেন্ট</span>
+            </div>
+            <div class="system-info">(MikroTik Payment সিস্টেম)</div>
+        </div>
+
+        <div class="confirmation-box">
+            <div class="icon">
+                <i class="fas fa-check-circle"></i> <!-- Success Icon -->
+            </div>
+            <h1>অ্যাক্টিভেশন সফল!</h1>
+            <p class="message">আপনার নির্বাচিত ইন্টারনেট প্যাকেজটি সফলভাবে চালু করা হয়েছে।</p>
+
+            <div class="details">
+                 <h2>সক্রিয়করণ বিবরণ</h2>
+                <p>
+                    <span class="label">প্যাকেজের নাম:</span>
+                    <span class="value package-name">[-]</span> <!-- এখানে আসল ডেটা বসবে -->
+                </p>
+                <p>
+                    <span class="label">ব্যবহারকারী (মোবাইল):</span>
+                    <span class="value phone-number">[01xxxxxxxxx]</span> <!-- এখানে আসল ডেটা বসবে -->
+                </p>
+                 <p>
+                    <span class="label">পেমেন্ট রেফারেন্স (TrxID):</span>
+                    <span class="value trx-id">[xxxxxxxxxxxx]</span> <!-- এখানে আসল ডেটা বসবে -->
+                </p>
+                 <p>
+                    <span class="label">সক্রিয়করণের সময়:- (UTC+6:00)</span>
+                     <!-- এই স্প্যান ট্যাগে সময় দেখানো হবে -->
+                    <span class="value datetime" id="activationTime">লোড হচ্ছে...</span>
+                </p>
+            </div>
+
+            <div class="support-info">
+                আপনার ইন্টারনেট সংযোগ উপভোগ করুন! <br>
+                যেকোনো প্রয়োজনে সাপোর্টে যোগাযোগ করুন: <a href="tel:01560020281">01560020281</a> অথবা <a href="tel:01767865896">01767865896</a> (WhatsApp)
+            </div>
+
+            <div class="actions">
+                 <!-- The button now links directly to the speed test -->
+                <a href="https://www.speedtest.net/run" class="action-button" target="_blank">
+                    সংযোগ পরীক্ষা করুন
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- এই স্ক্রিপ্টটি সময় দেখানোর কাজ করবে -->
+    <script>
+        // নিশ্চিত করুন যে পুরো HTML ডকুমেন্ট লোড হওয়ার পরেই এই কোড চলবে
+        document.addEventListener('DOMContentLoaded', function() {
+            // সময় দেখানোর জন্য নির্ধারিত HTML এলিমেন্টটি খুঁজে বের করুন
+            const activationTimeElement = document.getElementById('activationTime');
+
+            // যদি এলিমেন্টটি পাওয়া যায়
+            if (activationTimeElement) {
+                try {
+                    // বর্তমান সময় নিন
+                    const now = new Date();
+
+                    // সময় ফরম্যাট করার জন্য অপশনগুলো সেট করুন
+                    const options = {
+                        timeZone: 'Asia/Dhaka', // ঢাকা টাইমজোন (UTC+6) সেট করা
+                        year: 'numeric',        // বছর (সংখ্যায়)
+                        month: 'long',          // মাস (পুরো নামে)
+                        day: 'numeric',         // দিন (সংখ্যায়)
+                        hour: 'numeric',        // ঘণ্টা (সংখ্যায়)
+                        minute: 'numeric',      // মিনিট (সংখ্যায়)
+                        second: 'numeric',      // সেকেন্ড (সংখ্যায়)
+                        hour12: true            // ১২-ঘণ্টার ফরম্যাট (যেমন: সকাল/বিকাল বা AM/PM)
+                    };
+
+                    // Intl.DateTimeFormat ব্যবহার করে বাংলা (বাংলাদেশ) লোকাল এবং নির্ধারিত অপশন অনুযায়ী সময় ফরম্যাট করুন
+                    const formatter = new Intl.DateTimeFormat('bn-BD', options);
+                    const dhakaTimeString = formatter.format(now);
+
+                    // ফরম্যাট করা সময়টি HTML এলিমেন্টে প্রদর্শন করুন
+                    activationTimeElement.textContent = dhakaTimeString;
+
+                } catch (error) {
+                    // যদি কোনো কারণে সময় দেখাতে সমস্যা হয়
+                    console.error("সময় দেখাতে সমস্যা হয়েছে:", error);
+                    activationTimeElement.textContent = "সময় দেখানো সম্ভব হচ্ছে না";
+                }
+            } else {
+                console.error("এলিমেন্ট যার আইডি 'activationTime' খুঁজে পাওয়া যায়নি।");
+            }
+        });
+    </script>
+
+</body>
+</html>
